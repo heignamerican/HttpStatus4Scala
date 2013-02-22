@@ -8,16 +8,16 @@ object CaseClassPattern {
       case "" =>
         list.map(_.toString())
       case x if x.matches("\\d+") =>
-        list.find(_.code == query.toInt) match {
+        list.find(_.code == query) match {
           case Some(x) => Seq(x.reason)
-          case None => list.filter(_.code.toString().startsWith(query)).map(_.toString())
+          case None => list.filter(_.code.startsWith(query)).map(_.toString())
         }
       case _ =>
         list.filter(_.reason.contains(query)).map(_.toString())
     }
   }
 
-  case class Status(code: Int, reason: String) {
+  case class Status(code: String, reason: String) {
     override def toString() = "%s %s".format(code, reason)
   }
 }
